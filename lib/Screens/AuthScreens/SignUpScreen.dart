@@ -1,3 +1,4 @@
+import 'package:Uttarbanga/Backend/Auth/SignUpBackEnd.dart';
 import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:Uttarbanga/Screens/FlashScreen.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +12,12 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final _phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: AllScaffoldKeys.signUpScreen,
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {
       //     Navigator.push(context, PageRouteBuilder(
@@ -44,7 +47,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      print(_phoneNumberController.text);
+                      // showSnackbarOnly(_phoneNumberController.text);
+
+                      FirebaseSignUp.signUpWithPhoneNumber(
+                          _phoneNumberController.text, context);
                     },
                     child: Text("VERIFY"),
                   )

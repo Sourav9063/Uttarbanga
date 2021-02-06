@@ -1,5 +1,5 @@
 import 'package:Uttarbanga/GlobalVar.dart';
-import 'package:Uttarbanga/Screens/AuthScreens/SignUp.dart';
+import 'package:Uttarbanga/Screens/AuthScreens/SignUpScreen.dart';
 import 'package:Uttarbanga/Screens/FlashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
