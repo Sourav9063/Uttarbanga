@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "893186097019",
+    "project_id": "uttarbanga-6b94c",
+    "storage_bucket": "uttarbanga-6b94c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893186097019:android:cf5618e120831a445547de",
+        "android_client_info": {
+          "package_name": "com.example.Uttarbanga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893186097019-75q714gmn3g9fp22vd95fggaemcrfam3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Uttarbanga",
+            "certificate_hash": "bbdfd0a9ea97dc2a44e5ae24dac51a657072dda0"
+          }
+        },
+        {
+          "client_id": "893186097019-eeolmt87fia5v8b807ohjbqf4ncakl33.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQh4B9aNI99rsIkYNGiVB2x6S4T0Nc1-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893186097019-eeolmt87fia5v8b807ohjbqf4ncakl33.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
