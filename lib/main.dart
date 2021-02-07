@@ -1,26 +1,49 @@
+import 'package:Uttarbanga/Components/Theme/ThemeBackEnd.dart';
+import 'package:Uttarbanga/Components/Theme/ThemeDataCus.dart';
 import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:Uttarbanga/Screens/AuthScreens/SignUpScreen.dart';
 import 'package:Uttarbanga/Screens/FlashScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return ChangeNotifierProvider(
+      create: (context) => themeChangeProvider,
+      child: Consumer<DarkThemeProvider>(
+        builder: (context, value, child) => MaterialApp(
+          theme: Styles.themeData(themeChangeProvider.darkTheme, context),
+          // darkTheme: ThemeData(
+          //     brightness: Brightness.dark,
+          //     scaffoldBackgroundColor: Color(0xff000C18)),
+          home: ScreenSize(),
+        ),
       ),
-      darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          scaffoldBackgroundColor: Color(0xff000C18)),
-      home: ScreenSize(),
     );
   }
 }
