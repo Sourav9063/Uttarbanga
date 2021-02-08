@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
 
 class DarkThemePreference {
   static const THEME_STATUS = "THEMESTATUS";
@@ -14,6 +17,7 @@ class DarkThemePreference {
     return prefs.getBool(THEME_STATUS) ?? false;
   }
 }
+
 class DarkThemeProvider with ChangeNotifier {
   DarkThemePreference darkThemePreference = DarkThemePreference();
   bool _darkTheme = false;

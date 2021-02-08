@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:flutter/material.dart';
 
 class Styles {
@@ -27,8 +28,46 @@ class Styles {
     //   ),
     // );
 
-    return isDarkTheme
-        ? ThemeData.light()
-        : ThemeData.dark().copyWith(scaffoldBackgroundColor: Color(0xff000C18));
+    return !isDarkTheme
+        ? ThemeData.light().copyWith(
+            // brightness: Brightness.dark,
+            snackBarTheme: SnackBarThemeData(
+              backgroundColor: Colors.teal,
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.vertical(
+              //     top: Radius.circular(8),
+              //   ),
+              // ),
+            ),
+            scaffoldBackgroundColor: CusCol.lightBack,
+            floatingActionButtonTheme:
+                FloatingActionButtonThemeData(backgroundColor: CusCol.fabC),
+            buttonTheme: ButtonTheme.of(context).copyWith(
+              buttonColor: CusCol.y0,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              shape: StadiumBorder(),
+            ))
+        : ThemeData.dark().copyWith(
+            snackBarTheme: SnackBarThemeData(
+              backgroundColor: Colors.teal,
+              // shape: RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.vertical(
+              //     top: Radius.circular(8),
+              //   ),
+              // ),
+            ),
+            scaffoldBackgroundColor: CusCol.darkBack,
+            floatingActionButtonTheme:
+                FloatingActionButtonThemeData(backgroundColor: CusCol.fabC),
+            brightness: Brightness.dark,
+            accentColor: CusCol.light0,
+            textTheme:
+                ThemeData.dark().textTheme.apply(bodyColor: Colors.white),
+            buttonTheme: ButtonTheme.of(context).copyWith(
+              colorScheme: ColorScheme.highContrastDark(),
+              buttonColor: CusCol.dark2,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              shape: StadiumBorder(),
+            ));
   }
 }

@@ -53,7 +53,7 @@ class _FlashScreenState extends State<FlashScreen> {
                 child: Container(
                   child: Center(
                     child: Text(
-                      "বৃহত্তর উত্তরবঙ্গ কল্যান সমিতি",
+                     AppData.appName ,
                       style: Theme.of(context).textTheme.headline5.copyWith(
                             fontWeight: FontWeight.w300,
                             foreground: Paint()
