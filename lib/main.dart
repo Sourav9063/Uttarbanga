@@ -1,12 +1,19 @@
+import 'dart:io';
+
+import 'package:Uttarbanga/Backend/Data/sharedPref.dart';
 import 'package:Uttarbanga/Components/Theme/ThemeBackEnd.dart';
 import 'package:Uttarbanga/Components/Theme/ThemeDataCus.dart';
 import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:Uttarbanga/Screens/AuthScreens/SignUpScreen.dart';
 import 'package:Uttarbanga/Screens/FlashScreen.dart';
+import 'package:Uttarbanga/Screens/ObBoarding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Screens/ErrorScreen.dart';
+
+// java -jar "C:\Users\USER\Downloads\Programs\bundletool-all-1.4.0.jar" build-apks --bundle="D:\Flutter app D exp\Uttarbanga\build\app\outputs\bundle\release\app-release.aab" --output=Uttarbanga.apks
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -19,11 +26,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
-
+  bool onbvalue = false;
   @override
   void initState() {
     super.initState();
     getCurrentAppTheme();
+    getOnBardingData();
+  }
+
+  void getOnBardingData() async {
+    onbvalue = await OnboardingData.getOnbData();
   }
 
   void getCurrentAppTheme() async {
@@ -41,7 +53,7 @@ class _MyAppState extends State<MyApp> {
           // darkTheme: ThemeData(
           //     brightness: Brightness.dark,
           //     scaffoldBackgroundColor: Color(0xff000C18)),
-          home: ScreenSize(),
+          home: ScreenSize(onb: onbvalue),
         ),
       ),
     );
@@ -49,7 +61,8 @@ class _MyAppState extends State<MyApp> {
 }
 
 class ScreenSize extends StatelessWidget {
-  ScreenSize({Key key}) : super(key: key);
+  ScreenSize({Key key, this.onb}) : super(key: key);
+  final bool onb;
   final Future<FirebaseApp> _initialize = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
@@ -66,25 +79,11 @@ class ScreenSize extends StatelessWidget {
 
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
-            return SignUpScreen();
+            return onb ? Splash() : OnboardingScreen();
           }
 
           // Otherwise, show something whilst waiting for initialization to complete
           return FlashScreen();
         });
-  }
-}
-
-class SomethingWentWrong extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.red,
-      body: Center(
-        child: Icon(
-          Icons.error,
-        ),
-      ),
-    );
   }
 }

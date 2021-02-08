@@ -1,5 +1,14 @@
+import 'dart:io';
+
 import 'package:Uttarbanga/GlobalVar.dart';
+import 'package:Uttarbanga/Screens/AuthScreens/ProfileScreen.dart';
+import 'package:Uttarbanga/Screens/AuthScreens/SignUpScreen.dart';
+import 'package:Uttarbanga/Screens/ErrorScreen.dart';
+import 'package:Uttarbanga/Screens/HomeScreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'package:splashscreen/splashscreen.dart';
 
 class FlashScreen extends StatefulWidget {
   FlashScreen({Key key}) : super(key: key);
@@ -53,7 +62,7 @@ class _FlashScreenState extends State<FlashScreen> {
                 child: Container(
                   child: Center(
                     child: Text(
-                     AppData.appName ,
+                      AppData.appName,
                       style: Theme.of(context).textTheme.headline5.copyWith(
                             fontWeight: FontWeight.w300,
                             foreground: Paint()
@@ -67,5 +76,53 @@ class _FlashScreenState extends State<FlashScreen> {
         ),
       ),
     );
+  }
+}
+
+class Splash extends StatefulWidget {
+  @override
+  _SplashState createState() => new _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  Future<Widget> loadFromFuture() async {
+    await Future.delayed(Duration(seconds: 3));
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        if (FirebaseAuth.instance.currentUser == null) {
+          return Future.value(SignUpScreen());
+        } else {
+          if (FirebaseAuth.instance.currentUser.displayName == null ||
+              FirebaseAuth.instance.currentUser.displayName == '') {
+            return Future.value(ProfileScreen());
+          } else
+            return Future.value(HomeScreen());
+        }
+      }
+    } on SocketException catch (_) {
+      return Future.value(SomethingWentWrong(
+        message: "ইন্টারনেট সংযোগ নেই",
+      ));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new SplashScreen(
+        navigateAfterFuture: loadFromFuture(),
+        title: new Text(
+          AppData.appName,
+          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+        ),
+        image: new Image.asset(
+          "assets/img/logo.jpg",
+          fit: BoxFit.contain,
+        ),
+        backgroundColor: Colors.white,
+        styleTextUnderTheLoader: new TextStyle(),
+        photoSize: 100.0,
+        onClick: () => print("Flutter Egypt"),
+        loaderColor: Colors.red);
   }
 }

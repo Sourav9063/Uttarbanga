@@ -14,7 +14,8 @@ class FirebaseSignUp {
           verificationId: verificationId, smsCode: smsCode);
       await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
       if (FirebaseAuth.instance.currentUser != null) {
-        if (FirebaseAuth.instance.currentUser.displayName != null) {
+        if (FirebaseAuth.instance.currentUser.displayName != null ||
+            FirebaseAuth.instance.currentUser.displayName == '') {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
