@@ -129,7 +129,9 @@ class _OTPscreenState extends State<OTPscreen> {
                       },
                       onCompleted: (value) async {
                         FirebaseSignUp.signUpWithPhoneCredintial(
-                            widget.verificationId, _otpcontroller.text,context);
+                            widget.verificationId,
+                            _otpcontroller.text,
+                            context);
                       },
                       beforeTextPaste: (text) {
                         // print("Allowing to paste $text");
@@ -158,7 +160,10 @@ class _OTPscreenState extends State<OTPscreen> {
                         ? Center(
                             child: TextButton(
                               onPressed: () {
-                                stopWatch();
+                                Navigator.pop(context);
+                                // stopWatch();
+                                // FirebaseSignUp.signUpWithPhoneNumber(
+                                //     widget.phoneNumber, context);
                               },
                               child: Text(
                                 "আবার চেষ্টা করুন",

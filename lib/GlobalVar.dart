@@ -1,4 +1,5 @@
 import 'package:Uttarbanga/Screens/AuthScreens/SignUpScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,13 +8,25 @@ double ksch;
 double kscw;
 
 class Allkeys {
-  static final String memberCol = 'MemberKey';
+  static final String requestCol = 'RequestCollection';
   static final String adminCol = 'AdminKey';
+  // static final String name = "nameKey";
+  // static final String designation = "designationKey";
+  // static final String department = "departmentKey";
+  // static final String icNo = "icNoKey";
+  // static final String address = "addressKey";
+  // static final String zilla = "zillaKey";
+  // static final String upazilla = "upazillaKey";
+  // static final String phoneNumber = "phoneNumberKey";
+  // static final String bloodType = "bloodTypeKey";
+  // static final String joiningDate = "joiningDateKey";
+  // static final String lprDate = "lprDateKey";
 }
 
 class AllScaffoldKeys {
   static final signUpScreen = GlobalKey<ScaffoldState>();
   static final otpScreen = GlobalKey<ScaffoldState>();
+  static final profileScreen = GlobalKey<ScaffoldState>();
 }
 
 showSnackbarOnly(String title) {
@@ -42,6 +55,50 @@ class AppData {
 }
 
 class UsefulFunc {
+  static String timestampToString(Timestamp timestamp) {
+    String date = timestamp.toDate().day.toString() +
+        ' ' +
+        getMonthName(timestamp.toDate().month) +
+        ', ' +
+        timestamp.toDate().year.toString();
+    return date;
+  }
+
+  static List<String> monthName = [
+    'Not availabel',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
+  static getMonthName(int n) {
+    return monthName[n];
+  }
+
+  static String id;
+  static getSetMillisecondsId() {
+    UsefulFunc.id = DateTime.now().millisecondsSinceEpoch.toString();
+    return new DateTime.now().millisecondsSinceEpoch.toString();
+  }
+
+  static String timeToString(DateTime nowMil) {
+    String uploaded = nowMil.day.toString() +
+        ' ' +
+        UsefulFunc.getMonthName(nowMil.month) +
+        ', ' +
+        nowMil.year.toString();
+    return uploaded;
+  }
+
   static bool isNumericUsingtryParse(String string) {
     // Null or empty string is not a number
     if (string == null || string.isEmpty) {

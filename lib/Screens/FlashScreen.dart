@@ -98,6 +98,7 @@ class _SplashState extends State<Splash> {
             return Future.value(ProfileScreen());
           } else
             return Future.value(HomeScreen());
+            
         }
       }
     } on SocketException catch (_) {

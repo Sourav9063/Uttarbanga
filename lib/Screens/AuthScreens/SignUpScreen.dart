@@ -26,15 +26,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final themeChange = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
       key: AllScaffoldKeys.signUpScreen,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return FlashScreen();
-            },
-          ));
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     Navigator.push(context, PageRouteBuilder(
+      //       pageBuilder: (context, animation, secondaryAnimation) {
+      //         return FlashScreen();
+      //       },
+      //     ));
+      //   },
+      // ),
       body: AnimatedContainer(
         duration: Duration(milliseconds: 400),
         curve: Curves.fastLinearToSlowEaseIn,
@@ -48,6 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+              
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -82,10 +83,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       (ksch - MediaQuery.of(context).viewInsets.bottom) * .3,
                   child: Lottie.network(
                       "https://assets6.lottiefiles.com/packages/lf20_dyq0qz89/data.json",
-                      
+
                       frameRate: FrameRate(60),
                       fit: BoxFit.contain,
                       reverse: true),
+                  // child: Image.asset(
+                  //   "assets/gif/logIn1.gif",
+                  //   fit: BoxFit.contain,
+                  // ),
                 ),
                 // FlatButton(
                 //     onPressed: () {

@@ -7,6 +7,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseSignUp {
+  static void resendOtp(int forceResendingToken, String phoneNumber) {
+    try {
+      FirebaseAuth.instance.verifyPhoneNumber(
+        forceResendingToken:forceResendingToken ,
+          phoneNumber: phoneNumber,
+          verificationCompleted: null,
+          verificationFailed: null,
+          codeSent: null,
+          codeAutoRetrievalTimeout: null);
+    } catch (e) {}
+  }
+
   static void signUpWithPhoneCredintial(
       String verificationId, String smsCode, BuildContext context) async {
     try {
