@@ -39,6 +39,7 @@ class Styles {
               //   ),
               // ),
             ),
+            accentColor: CusCol.light0,
             scaffoldBackgroundColor: CusCol.lightBack,
             floatingActionButtonTheme:
                 FloatingActionButtonThemeData(backgroundColor: CusCol.fabC),

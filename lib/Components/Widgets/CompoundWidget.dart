@@ -1,6 +1,7 @@
 import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class IconAccount extends StatelessWidget {
   IconAccount({
@@ -10,23 +11,30 @@ class IconAccount extends StatelessWidget {
   }) : super(key: key);
   final double radious;
   final String imglink;
-  final id = UsefulFunc.getSetMillisecondsId();
+  // final id = UsefulFunc.getSetMillisecondsId();
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(1000),
-          gradient: RadialGradient(colors: [
-            Colors.pinkAccent.shade400,
-            Colors.indigoAccent.shade100
-          ])),
+          borderRadius: BorderRadius.circular(1000), color: CusCol.dark2
+          // gradient: RadialGradient(
+          //     colors: [Colors.pinkAccent.shade400, Colors.indigoAccent.shade100]),
+          ),
+      // color: Colors.black,
       height: radious,
+
       width: radious,
-      child: imglink == null
-          ? Icon(
-              Icons.account_circle,
-              size: radious,
-              color: Colors.white,
+      child: imglink == null || imglink == ""
+          ?
+          // Icon(
+          //     Icons.account_circle,
+          //     size: radious,
+          //     color: Colors.white,
+          //   )
+          Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Lottie.asset("assets/lottie/ProfileIcon.json",
+                  fit: BoxFit.contain, reverse: true),
             )
           : Padding(
               padding: const EdgeInsets.all(10.0),
@@ -37,12 +45,12 @@ class IconAccount extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => ImageFull(
                                 imgLink: imglink,
-                                id: id,
+                                id: imglink,
                               )));
                 },
                 child: ClipOval(
                   child: Hero(
-                    tag: id,
+                    tag: imglink,
                     child: CachedNetworkImage(
                       imageUrl: imglink,
                       height: radious,
