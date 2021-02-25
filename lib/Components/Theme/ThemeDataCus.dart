@@ -31,6 +31,7 @@ class Styles {
     return !isDarkTheme
         ? ThemeData.light().copyWith(
             // brightness: Brightness.dark,
+            colorScheme: ColorScheme.light(),
             snackBarTheme: SnackBarThemeData(
               backgroundColor: Colors.teal,
               // shape: RoundedRectangleBorder(
@@ -40,6 +41,8 @@ class Styles {
               // ),
             ),
             accentColor: CusCol.light0,
+            appBarTheme:
+                AppBarTheme(brightness: Brightness.light, color: CusCol.light1),
             scaffoldBackgroundColor: CusCol.lightBack,
             floatingActionButtonTheme:
                 FloatingActionButtonThemeData(backgroundColor: CusCol.fabC),
@@ -49,6 +52,7 @@ class Styles {
               shape: StadiumBorder(),
             ))
         : ThemeData.dark().copyWith(
+            colorScheme: ColorScheme.dark(),
             snackBarTheme: SnackBarThemeData(
               backgroundColor: Colors.teal,
               // shape: RoundedRectangleBorder(
@@ -57,6 +61,8 @@ class Styles {
               //   ),
               // ),
             ),
+            appBarTheme:
+                AppBarTheme(brightness: Brightness.light, color: CusCol.dark2),
             scaffoldBackgroundColor: CusCol.darkBack,
             floatingActionButtonTheme:
                 FloatingActionButtonThemeData(backgroundColor: CusCol.fabC),

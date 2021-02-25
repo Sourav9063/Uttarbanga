@@ -1,22 +1,40 @@
+import 'package:Uttarbanga/Backend/Data/UserData.dart';
 import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
-class UttarbangaFirestore {
-  final _userCollRef = FirebaseFirestore.instance.collection(Allkeys.requestCol);
+class UttarbangaFirestoreReq {
+  final _userCollRef =
+      FirebaseFirestore.instance.collection(Allkeys.requestCol);
 
-  getDocumentsFromDocID(String docID) async {
-    _userCollRef.get().then((value) => print(value.docs));
-    _userCollRef.doc(docID).get().then((value) {
-      print(value.data().keys.toList());
+  Future<UserData> getUserDataFromUID(String uid) async {
+    DocumentSnapshot doc = await _userCollRef.doc(uid).get();
+
+    return UserData.fromMap(doc.data());
+  }
+
+  // UserData getUserDataFromDocSnp(QueryDocumentSnapshot queryDocumentSnapshot) {
+  //   return UserData.fromMap(queryDocumentSnapshot.data());
+  // }
+
+  Future<List<UserData>> getUserList() async {
+    List<UserData> userDataList = [];
+    await _userCollRef.get().then((QuerySnapshot value) {
+      value.docs.forEach((QueryDocumentSnapshot element) {
+        userDataList.add(UserData.fromMap(element.data()));
+      });
     });
+    return userDataList;
+  }
+
+  setDocumentwithUID(String uid, Map mapData) async {
+    await _userCollRef.doc(uid).set(mapData);
   }
 }
 
-class GetObjects {
-  getUserObjectsFromDocSnapshot(DocumentSnapshot documentSnapshot) {
-    Map<String, dynamic> map = documentSnapshot.data();
+// class GetObjects {
+//   getUserObjectsFromDocSnapshot(DocumentSnapshot documentSnapshot) {
+//     Map<String, dynamic> map = documentSnapshot.data();
 
-    // map.map((key, value) => null)
-  }
-}
+//     // map.map((key, value) => null)
+//   }
+// }

@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:Uttarbanga/Backend/Data/sharedPref.dart';
 import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:Uttarbanga/Screens/AuthScreens/ProfileScreen.dart';
 import 'package:Uttarbanga/Screens/AuthScreens/SignUpScreen.dart';
 import 'package:Uttarbanga/Screens/ErrorScreen.dart';
 import 'package:Uttarbanga/Screens/HomeScreen.dart';
+import 'package:Uttarbanga/Screens/ObBoarding.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -86,19 +88,23 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> {
   Future<Widget> loadFromFuture() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 1));
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        if (FirebaseAuth.instance.currentUser == null) {
-          return Future.value(SignUpScreen());
+        bool onbvalue = await OnboardingData.getOnbData();
+        if (onbvalue) {
+          if (FirebaseAuth.instance.currentUser == null) {
+            return Future.value(SignUpScreen());
+          } else {
+            if (FirebaseAuth.instance.currentUser.displayName == null ||
+                FirebaseAuth.instance.currentUser.displayName == '') {
+              return Future.value(ProfileScreen());
+            } else
+              return Future.value(HomeScreen());
+          }
         } else {
-          if (FirebaseAuth.instance.currentUser.displayName == null ||
-              FirebaseAuth.instance.currentUser.displayName == '') {
-            return Future.value(ProfileScreen());
-          } else
-            return Future.value(HomeScreen());
-            
+          return Future.value(OnboardingScreen());
         }
       }
     } on SocketException catch (_) {
@@ -114,8 +120,10 @@ class _SplashState extends State<Splash> {
         navigateAfterFuture: loadFromFuture(),
         title: new Text(
           AppData.appName,
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          style: new TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20.0),
         ),
+        
         image: new Image.asset(
           "assets/img/logo.jpg",
           fit: BoxFit.contain,

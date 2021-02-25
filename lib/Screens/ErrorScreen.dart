@@ -32,10 +32,11 @@ class SomethingWentWrong extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: () {
+               
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ScreenSize(),
+                      builder: (context) => MyApp(),
                     ),
                     (Route<dynamic> route) => false);
               },

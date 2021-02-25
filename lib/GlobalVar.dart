@@ -52,6 +52,16 @@ class CusCol {
 
 class AppData {
   static final String appName = "বৃহত্তর উত্তরবঙ্গ কল্যান সমিতি";
+
+  static final List<String> appImageLink = [
+    "https://www.odhikar.news/assets/news_photos/2018/09/06/inside-image/15863_4.jpg",
+    "https://www.odhikar.news/assets/news_photos/2018/09/06/inside-image/15863_1.jpg",
+    "https://www.paribrajok.com/wp-content/uploads/2019/09/4237ce2fd512b63e68c2a76bab9ede2a.jpg",
+    "https://travelbd.xyz/wp-content/uploads/2018/11/1200px-Nayabad_Mosque_1_Front_side-750x350.jpg",
+    "https://qph.fs.quoracdn.net/main-qimg-fcb940b57d14839f65a2810d1a0774f0",
+    "https://bengali.oneindia.com/img/2017/04/12-1491999807-pic02-19-1492599626.jpg",
+    "http://tour.com.bd/uploads/cms/images/tajhat-palace-rangpur.jpg"
+  ];
 }
 
 class UsefulFunc {
@@ -149,8 +159,11 @@ class UsefulFunc {
         case '9':
           bengali = bengali + '৯';
           break;
-        default:
+        case '0':
           bengali = bengali + '০';
+          break;
+        default:
+          bengali = bengali + eng[i];
       }
     }
     return bengali;

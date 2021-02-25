@@ -5,6 +5,8 @@ import 'package:concentric_transition/concentric_transition.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PageData {
   final String title;
@@ -62,6 +64,8 @@ class OnboardingScreen extends StatelessWidget {
     CusCol.light1
   ];
 
+  PageController _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +74,7 @@ class OnboardingScreen extends StatelessWidget {
           ConcentricPageView(
             // reverse: false,
             colors: colors,
+            pageController: _pageController,
 
 //          opacityFactor: 1.0,
 //          scaleFactor: 0.0,
@@ -128,7 +133,29 @@ class OnboardingScreen extends StatelessWidget {
                 size: kscw * .08,
               ),
             ),
-          )
+          ),
+          Positioned(
+            left: (kscw * .5) - 25,
+            top: ksch * .76,
+            child: IgnorePointer(
+              // ignoring: _pageController.page == (pages.length - 1),
+              child: Icon(
+                Icons.navigate_next_sharp,
+                size: 50,
+              ),
+            ),
+          ),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: SmoothPageIndicator(
+                  controller: _pageController,
+                  count: pages.length,
+                  effect: SwapEffect(
+                      dotColor: Colors.white, activeDotColor: CusCol.light2),
+                ),
+              ))
         ],
       ),
     );
@@ -149,14 +176,16 @@ class PageCard extends StatelessWidget {
       // margin: EdgeInsets.symmetric(
       //   horizontal: 30.0,
       // ),
-      child: Stack(
-//        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          // _buildPicture(context),
-          _buildlottie(page.link),
-          // SizedBox(height: 30),
-          Center(child: _buildText(context)),
-        ],
+      child: SafeArea(
+        child: Stack(
+          //        mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // _buildPicture(context),
+            _buildlottie(page.link),
+            // SizedBox(height: 30),
+            Align(alignment: Alignment(0, .25), child: _buildText(context)),
+          ],
+        ),
       ),
     );
   }
@@ -174,59 +203,59 @@ class PageCard extends StatelessWidget {
     );
   }
 
-  Widget _buildPicture(
-    BuildContext context, {
-    double size = 190,
-    double iconSize = 170,
-  }) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(60.0)),
-        color: page.bgColor
-//            .withBlue(page.bgColor.blue - 40)
-            .withGreen(page.bgColor.green + 20)
-            .withRed(page.bgColor.red - 100)
-            .withAlpha(90),
-      ),
-      margin: EdgeInsets.only(
-        top: 140,
-      ),
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Positioned.fill(
-            child: RotatedBox(
-              quarterTurns: 2,
-              child: Icon(
-                page.icon,
-                size: iconSize + 20,
-                color: page.bgColor
-                    .withBlue(page.bgColor.blue - 10)
-                    .withGreen(220),
-              ),
-            ),
-            right: -5,
-            bottom: -5,
-          ),
-          Positioned.fill(
-            child: RotatedBox(
-              quarterTurns: 5,
-              child: Icon(
-                page.icon,
-                size: iconSize + 20,
-                color: page.bgColor.withGreen(66).withRed(77),
-              ),
-            ),
-          ),
-          Icon(
-            page.icon,
-            size: iconSize,
-            color: page.bgColor.withRed(111).withGreen(220),
-          ),
-        ],
-      ),
-    );
-  }
+//   Widget _buildPicture(
+//     BuildContext context, {
+//     double size = 190,
+//     double iconSize = 170,
+//   }) {
+//     return Container(
+//       width: size,
+//       height: size,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.all(Radius.circular(60.0)),
+//         color: page.bgColor
+// //            .withBlue(page.bgColor.blue - 40)
+//             .withGreen(page.bgColor.green + 20)
+//             .withRed(page.bgColor.red - 100)
+//             .withAlpha(90),
+//       ),
+//       margin: EdgeInsets.only(
+//         top: 140,
+//       ),
+//       child: Stack(
+//         fit: StackFit.expand,
+//         children: <Widget>[
+//           Positioned.fill(
+//             child: RotatedBox(
+//               quarterTurns: 2,
+//               child: Icon(
+//                 page.icon,
+//                 size: iconSize + 20,
+//                 color: page.bgColor
+//                     .withBlue(page.bgColor.blue - 10)
+//                     .withGreen(220),
+//               ),
+//             ),
+//             right: -5,
+//             bottom: -5,
+//           ),
+//           Positioned.fill(
+//             child: RotatedBox(
+//               quarterTurns: 5,
+//               child: Icon(
+//                 page.icon,
+//                 size: iconSize + 20,
+//                 color: page.bgColor.withGreen(66).withRed(77),
+//               ),
+//             ),
+//           ),
+//           Icon(
+//             page.icon,
+//             size: iconSize,
+//             color: page.bgColor.withRed(111).withGreen(220),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
 }

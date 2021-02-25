@@ -8,18 +8,22 @@ class IconAccount extends StatelessWidget {
     @required this.radious,
     Key key,
     this.imglink,
+    this.padding,
+    this.id,
   }) : super(key: key);
   final double radious;
+  final double padding;
   final String imglink;
-  // final id = UsefulFunc.getSetMillisecondsId();
+  final String id;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(1000), color: CusCol.dark2
-          // gradient: RadialGradient(
-          //     colors: [Colors.pinkAccent.shade400, Colors.indigoAccent.shade100]),
-          ),
+        borderRadius: BorderRadius.circular(1000),
+        // color: CusCol.dark2
+        gradient: RadialGradient(
+            colors: [Colors.pinkAccent.shade400, Colors.indigoAccent.shade100]),
+      ),
       // color: Colors.black,
       height: radious,
 
@@ -32,12 +36,12 @@ class IconAccount extends StatelessWidget {
           //     color: Colors.white,
           //   )
           Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(padding ?? 8),
               child: Lottie.asset("assets/lottie/ProfileIcon.json",
                   fit: BoxFit.contain, reverse: true),
             )
           : Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(padding ?? 8.0),
               child: InkWell(
                 onTap: () {
                   Navigator.push(
@@ -45,17 +49,17 @@ class IconAccount extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => ImageFull(
                                 imgLink: imglink,
-                                id: imglink,
+                                id: id ?? imglink,
                               )));
                 },
                 child: ClipOval(
                   child: Hero(
-                    tag: imglink,
+                    tag: id ?? imglink,
                     child: CachedNetworkImage(
                       imageUrl: imglink,
                       height: radious,
                       width: radious,
-                      memCacheWidth: 300,
+                      memCacheWidth: 1080,
                       fit: BoxFit.cover,
                       errorWidget: (context, error, stackTrace) {
                         return Center(
@@ -101,7 +105,7 @@ class ImageFull extends StatelessWidget {
               tag: id,
               child: CachedNetworkImage(
                 imageUrl: imgLink,
-                memCacheWidth: 480,
+                memCacheWidth: 1080,
                 fit: BoxFit.contain,
                 errorWidget: (context, error, stackTrace) {
                   return Center(

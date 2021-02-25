@@ -48,7 +48,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-              
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -82,8 +81,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height:
                       (ksch - MediaQuery.of(context).viewInsets.bottom) * .3,
                   child: Lottie.network(
-                      "https://assets6.lottiefiles.com/packages/lf20_dyq0qz89/data.json",
-
+                      // "https://assets6.lottiefiles.com/packages/lf20_dyq0qz89/data.json",
+                      "https://assets7.lottiefiles.com/packages/lf20_q5pk6p1k.json",
                       frameRate: FrameRate(60),
                       fit: BoxFit.contain,
                       reverse: true),
