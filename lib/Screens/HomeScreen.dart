@@ -2,16 +2,20 @@ import 'dart:async';
 
 import 'package:Uttarbanga/Components/Theme/ThemeBackEnd.dart';
 import 'package:Uttarbanga/Components/Widgets/CompoundWidget.dart';
+import 'package:Uttarbanga/Components/customAnimations/HeroPageRoute.dart';
 import 'package:Uttarbanga/GlobalVar.dart';
 import 'package:Uttarbanga/Screens/AuthScreens/SignUpScreen.dart';
 import 'package:Uttarbanga/Screens/UserScreen.dart';
+import 'package:Uttarbanga/Screens/zilla.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:concentric_transition/page_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:glass_kit/glass_kit.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 import "dart:math" as math;
@@ -138,109 +142,132 @@ class _HomePagePageState extends State<HomePagePage> {
       ),
       body: SafeArea(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          child: Stack(
             children: [
-              Container(
-                padding: const EdgeInsets.all(5.0),
-                width: kscw * .95,
-                height: kscw,
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  children: [
-                    HomeIcons(
-                      icon: FlutterIcons.bank_mco,
-                      string: "গঠনতন্ত্র",
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.users_faw,
-                      string: "উপদেষ্টা মন্ডলী",
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.users_cog_faw5s,
-                      string: "কার্য নির্বাহী কমিটি",
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.people_mdi,
-                      string: "সিবিএ",
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.users_fea,
-                      string: "সদস্যবৃন্দ",
-                      function: () {
-                        Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) => UserList(),
-                            ));
-                      },
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.notification_ant,
-                      string: "নোটিশ",
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.message_reply_text_mco,
-                      string: "আলোচনা",
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.graph_bar_fou,
-                      string: "আর্থিক অবস্থা",
-                    ),
-                    HomeIcons(
-                      icon: FlutterIcons.feedback_mdi,
-                      string: "পরামর্শ",
-                    ),
-                  ],
+              Positioned(
+                top: 0,
+                left: 0,
+                height: kscw * 1.3,
+                right: 0,
+                // bottom: 0,
+                child: SvgPicture.asset(
+                  "assets/svg/RRBD.svg",
+                  fit: BoxFit.contain,
                 ),
               ),
-              Container(
-                height: (ksch - kscw) * .55,
-                width: kscw,
-                child: Stack(
-                  children: [
-                    PageView.builder(
-                        controller: _pageController,
-                        itemCount: AppData.appImageLink.length,
-                        itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(16),
-                                child: CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  imageUrl: AppData.appImageLink[index],
-                                  errorWidget: (context, error, stackTrace) {
-                                    return Center(
-                                      child: Icon(
-                                        Icons.error,
-                                        color: Colors.red,
-                                        size: kscw * .2,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(5.0),
+                    width: kscw * .95,
+                    height: kscw,
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      children: [
+                        HomeIcons(
+                          icon: FlutterIcons.my_location_mdi,
+                          string: "উত্তরবঙ্গ",
+                          function: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ZillaScreen(),
+                                ));
+                          },
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.users_faw,
+                          string: "উপদেষ্টা মন্ডলী",
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.users_cog_faw5s,
+                          string: "কার্য নির্বাহী কমিটি",
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.people_mdi,
+                          string: "সিবিএ",
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.users_fea,
+                          string: "সদস্যবৃন্দ",
+                          function: () {
+                            Navigator.push(
+                                context,
+                                CupertinoPageRoute(
+                                  builder: (context) => UserList(),
+                                ));
+                          },
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.notification_ant,
+                          string: "নোটিশ",
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.message_reply_text_mco,
+                          string: "আলোচনা",
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.graph_bar_fou,
+                          string: "আর্থিক অবস্থা",
+                        ),
+                        HomeIcons(
+                          icon: FlutterIcons.feedback_mdi,
+                          string: "পরামর্শ",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: (ksch - kscw) * .5,
+                    width: kscw,
+                    child: Stack(
+                      children: [
+                        PageView.builder(
+                            controller: _pageController,
+                            itemCount: AppData.appImageLink.length,
+                            itemBuilder: (context, index) => Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: CachedNetworkImage(
+                                      fit: BoxFit.cover,
+                                      imageUrl: AppData.appImageLink[index],
+                                      errorWidget:
+                                          (context, error, stackTrace) {
+                                        return Center(
+                                          child: Icon(
+                                            Icons.error,
+                                            color: Colors.red,
+                                            size: kscw * .2,
+                                          ),
+                                        );
+                                      },
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              Center(
+                                        child: CircularProgressIndicator(
+                                            value: downloadProgress.progress),
                                       ),
-                                    );
-                                  },
-                                  progressIndicatorBuilder:
-                                      (context, url, downloadProgress) =>
-                                          Center(
-                                    child: CircularProgressIndicator(
-                                        value: downloadProgress.progress),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )),
-                    Align(
-                      alignment: Alignment(0, .8),
-                      child: SmoothPageIndicator(
-                          controller: _pageController,
-                          effect: SwapEffect(
-                              // radius: 3,
-                              dotHeight: 8,
-                              dotColor: Colors.white54,
-                              activeDotColor: CusCol.light2),
-                          count: AppData.appImageLink.length),
-                    )
-                  ],
-                ),
-              )
+                                )),
+                        Align(
+                          alignment: Alignment(0, .8),
+                          child: SmoothPageIndicator(
+                              controller: _pageController,
+                              effect: SwapEffect(
+                                  // radius: 3,
+                                  dotHeight: 8,
+                                  dotColor: Colors.white54,
+                                  activeDotColor: CusCol.light2),
+                              count: AppData.appImageLink.length),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),
@@ -321,14 +348,20 @@ class HomeIcons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: kscw / 7,
-      width: kscw / 7,
-      margin: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(.1),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.grey.withOpacity(.3), width: 4)),
+    return GlassContainer.clearGlass(
+      height: kscw / 4,
+      width: kscw / 3.5,
+      borderRadius: BorderRadius.circular(16),
+      borderWidth: 3,
+      blur: 6,
+      color: Provider.of<DarkThemeProvider>(context).darkTheme
+          ? Colors.blueGrey.shade400.withOpacity(.2)
+          : Colors.pinkAccent.shade400.withOpacity(.3),
+      // margin: EdgeInsets.all(5),
+      // decoration: BoxDecoration(
+      //     color: Colors.grey.withOpacity(.1),
+      //     borderRadius: BorderRadius.circular(16),
+      //     border: Border.all(color: Colors.grey.withOpacity(.3), width: 4)),
       child: InkWell(
         onTap: function ?? () {},
         child: Column(
@@ -337,8 +370,12 @@ class HomeIcons extends StatelessWidget {
             Icon(
               icon ?? FlutterIcons.error_mdi,
               size: kscw / 8,
+              color: Colors.white,
             ),
-            Text(string ?? "নাম")
+            Text(
+              string ?? "নাম",
+              style: TextStyle(color: Colors.white),
+            )
           ],
         ),
       ),

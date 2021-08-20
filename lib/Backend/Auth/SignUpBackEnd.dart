@@ -10,7 +10,7 @@ class FirebaseSignUp {
   static void resendOtp(int forceResendingToken, String phoneNumber) {
     try {
       FirebaseAuth.instance.verifyPhoneNumber(
-        forceResendingToken:forceResendingToken ,
+          forceResendingToken: forceResendingToken,
           phoneNumber: phoneNumber,
           verificationCompleted: null,
           verificationFailed: null,
@@ -99,6 +99,7 @@ class FirebaseSignUp {
         },
         verificationFailed: (FirebaseException e) {
           // print("Verification failed");
+          // ScaffoldMessenger.of(context).showSnackBar(snackBar)
           AllScaffoldKeys.signUpScreen.currentState.showSnackBar(SnackBar(
             action: SnackBarAction(
               label: "OK",

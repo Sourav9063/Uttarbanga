@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'Screens/Chada.dart';
 import 'Screens/ErrorScreen.dart';
 // flutter build appbundle --no-shrink
 
@@ -88,7 +89,7 @@ class ScreenSize extends StatelessWidget {
 
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
-            return Splash();
+            return ChadaPage();
           }
 
           // Otherwise, show something whilst waiting for initialization to complete

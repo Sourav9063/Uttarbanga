@@ -23,6 +23,7 @@ class DarkThemeProvider with ChangeNotifier {
   bool get darkTheme => _darkTheme;
 
   set darkTheme(bool value) {
+    print("Build");
     _darkTheme = value;
     darkThemePreference.setDarkTheme(value);
     notifyListeners();

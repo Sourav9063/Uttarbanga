@@ -89,9 +89,28 @@ class UsefulFunc {
     'Nov',
     'Dec',
   ];
+  static List<String> monthNameBangla = [
+    'Not availabel',
+    'জানুয়ারি',
+    'ফেব্রুয়ারি',
+    'মার্চ',
+    'এপ্রিল',
+    'মে',
+    'জুন',
+    'জুলাই',
+    'অগাস্ট',
+    'সেপ্টেম্বর',
+    'অক্টোবর',
+    'নভেম্বর',
+    'ডিসেম্বর',
+  ];
 
   static getMonthName(int n) {
     return monthName[n];
+  }
+
+  static getMonthNameBangla(int n) {
+    return monthNameBangla[n];
   }
 
   static String id;
